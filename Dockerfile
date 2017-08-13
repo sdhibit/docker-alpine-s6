@@ -26,11 +26,8 @@ RUN apk --update upgrade \
  && curl -kL ${OVERLAY_URL} | tar -xz -C / \
 
 # Create app user
- && addgroup -g 666 -S app \
- && adduser -u 666 -SHG appuser appuser \
- && chown -R sonarr:sonarr \
-    ${APP_PATH} \
-    "/config"
+ && addgroup -g 666 -S appuser \
+ && adduser -u 666 -SHG appuser appuser
 
 # add local files
 COPY root/ /
