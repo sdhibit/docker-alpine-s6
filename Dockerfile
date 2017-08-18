@@ -19,7 +19,6 @@ RUN apk --update upgrade \
   ca-certificates \
   curl \
   shadow \
-  su-exec \
   tzdata \
 
 #Install s6 overlay
