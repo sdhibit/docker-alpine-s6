@@ -1,18 +1,18 @@
-FROM alpine:3.6
-MAINTAINER Steve Hibit <sdhibit@gmail.com>
+FROM alpine:latest
+LABEL maintainer="Steve Hibit <sdhibit@gmail.com>"
 
+# set version for s6 overlay
 ENV LANG='en_US.UTF-8' \
     LANGUAGE='en_US.UTF-8' \
     TERM='xterm' \
     APP_PATH='/app' \
-    CONFIG_PATH='/config'
+    CONFIG_PATH='/config' \
+    S6_KEEP_ENV=1
 
-# set version for s6 overlay
-ARG OVERLAY_VERSION="v1.20.0.0"
-ARG OVERLAY_ARCH="amd64"
-ARG OVERLAY_URL="https://github.com/just-containers/s6-overlay/releases/download/${OVERLAY_VERSION}/s6-overlay-${OVERLAY_ARCH}.tar.gz"
+ARG OVERLAY_VERSION="v1.21.4.0"
+ARG OVERLAY_URL="https://github.com/just-containers/s6-overlay/releases/download/${OVERLAY_VERSION}/s6-overlay-amd64.tar.gz"
 
-# Install helpful packages
+# Install base packages
 RUN apk --update upgrade \
  && apk --no-cache add \
   --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
@@ -20,15 +20,13 @@ RUN apk --update upgrade \
   curl \
   shadow \
   tzdata \
-
-#Install s6 overlay
- && curl -kL ${OVERLAY_URL} | tar -xz -C / \
-
+ && curl -sSL ${OVERLAY_URL} | tar xfz - -C / \
 # Create app user
  && addgroup -g 666 -S appuser \
  && adduser -u 666 -SHG appuser appuser
 
 # add local files
-COPY root/ /
+COPY root /
 
-ENTRYPOINT ["/init"]
+ENTRYPOINT [ "/init" ]
+CMD []
