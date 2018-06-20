@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.7
 LABEL maintainer="Steve Hibit <sdhibit@gmail.com>"
 
 # set version for s6 overlay
