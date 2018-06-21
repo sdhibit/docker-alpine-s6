@@ -25,6 +25,8 @@ RUN apk --update upgrade \
  && addgroup -g 666 -S appuser \
  && adduser -u 666 -SHG appuser appuser
 
+WORKDIR ${APP_PATH}
+
 # add local files
 COPY root /
 
