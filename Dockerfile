@@ -28,5 +28,7 @@ RUN apk --update upgrade \
 # add local files
 COPY root /
 
+RUN chmod +x /etc/cont-init.d/*
+
 ENTRYPOINT [ "/init" ]
 CMD []

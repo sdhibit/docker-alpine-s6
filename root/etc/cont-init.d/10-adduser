@@ -17,5 +17,5 @@ User gid:    $(id -g appuser)
 mkdir -p $APP_PATH
 mkdir -p $CONFIG_PATH
 
-chown appuser:appuser $APP_PATH
-chown appuser:appuser $CONFIG_PATH
+chown -R appuser:appuser $APP_PATH
+chown -R appuser:appuser $CONFIG_PATH
